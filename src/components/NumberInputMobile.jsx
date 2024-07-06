@@ -7,7 +7,7 @@ const NumberInputMobile = ({ value = 0, onChange }) => {
       value,
       min: 0,
       max: 9999,
-      onChange: (valueAsString: string, valueAsNumber: number) => onChange(valueAsString === '' ? 0 : valueAsNumber)
+      onChange: (valueAsString, valueAsNumber) => onChange(valueAsString === '' ? 0 : valueAsNumber)
     })
 
   const inc = getIncrementButtonProps()
