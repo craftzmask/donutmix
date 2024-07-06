@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import CalculateIngredients from './components/CalculateIngredients'
 
 const App = () => {
-  const [donutStyles, setDonutStyles] = useState(JSON.parse(localStorage.getItem('donutStyles') || ''))
+  const [donutStyles, setDonutStyles] = useState(JSON.parse(localStorage.getItem('donutStyles') || '') || [])
 
   useEffect(() => {
     localStorage.setItem('donutStyles', JSON.stringify(donutStyles))
