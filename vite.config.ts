@@ -7,7 +7,6 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'autoUpdate',
       manifest: {
         name: 'DonutMix',
         short_name: 'DonutMix',
