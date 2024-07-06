@@ -4,10 +4,10 @@ const NumberInputMobile = ({ value = 0, onChange }) => {
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
     useNumberInput({
       step: 1,
-      defaultValue: value,
+      value,
       min: 0,
-      max: 999,
-      onChange: (_: string, valueAsNumber: number) => onChange(valueAsNumber)
+      max: 9999,
+      onChange: (valueAsString: string, valueAsNumber: number) => onChange(valueAsString === '' ? 0 : valueAsNumber)
     })
 
   const inc = getIncrementButtonProps()

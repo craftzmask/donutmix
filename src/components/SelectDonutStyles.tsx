@@ -30,14 +30,15 @@ const SelectDonutStyles = ({ donutStyles, isOpen, onClose, onChange, onDelete })
                 value={textSearch} onChange={e => setTextSearch(e.target.value)}/>
             </InputGroup>
 
-            <VStack w='full'>
+            <VStack w='full' overflowY='auto'>
               {foundDonutStyles.map(donutStyle => 
                 <Accordion allowToggle w='full' key={donutStyle.id}>
                   <AccordionItem>
                     <AccordionButton>
                       <HStack w='full' justify='space-between'>
                         <Checkbox
-                          onChange={() => onChange({ ...donutStyle, selected: true })}
+                          isChecked={donutStyle.selected}
+                          onChange={() => onChange({ ...donutStyle, selected: !donutStyle.selected })}
                         >{donutStyle.name}</Checkbox>
                         <AccordionIcon />
                       </HStack>

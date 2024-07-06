@@ -8,9 +8,17 @@ const EditDonutStyleForm = ({ donutStyle, onChange, onDelete }) => {
   const [yeast, setYeast] = useState(donutStyle.yeast)
   const [water, setWater] = useState(donutStyle.water)
 
+  const flourInOz = flour * 16
+  const yeastInOz = yeast * 16
+  const waterInOz = water * 16
 
   const handleSaveClick = () => {
-    onChange({ ...donutStyle, flour, yeast, water })
+    onChange({
+      ...donutStyle,
+      flour: isLbs ? flour : flourInOz / 16,
+      yeast: isLbs ? yeast : yeastInOz / 16,
+      water: isLbs ? water : waterInOz / 16
+    })
   }
 
   const handleDeleteClick = () => {
@@ -20,8 +28,8 @@ const EditDonutStyleForm = ({ donutStyle, onChange, onDelete }) => {
   return (
     <>
       <HStack mt='3' w='full' justifyContent='space-between'>
-        <Text flex='1' fontWeight='bold' fontSize='xl'>Ingredients</Text>
-        <FormControl flex='1' display='flex' justifyContent='space-around' alignItems='center'>
+        <Text flex='2' fontWeight='bold' fontSize='xl'>Ingredients</Text>
+        <FormControl flex='1' display='flex' justifyContent='space-between' alignItems='center' gap='5'>
           <FormLabel mb='0' mr='0' fontSize='xl'>oz</FormLabel>
           <Switch
             size='lg'
@@ -34,17 +42,23 @@ const EditDonutStyleForm = ({ donutStyle, onChange, onDelete }) => {
 
       <FormControl display='flex' mt='3'>
         <FormLabel flex='1'>Flour</FormLabel>
-        <NumberInputMobile value={donutStyle.flour} onChange={setFlour} />
+        <NumberInputMobile
+          value={isLbs ? flour : flourInOz}
+          onChange={value => setFlour(isLbs ? value : value / 16)} />
       </FormControl>
 
       <FormControl display='flex' mt='3'>
         <FormLabel flex='1'>Yeast</FormLabel>
-        <NumberInputMobile value={donutStyle.yeast} onChange={setYeast} />
+        <NumberInputMobile
+          value={isLbs ? yeast : yeastInOz}
+          onChange={value => setYeast(isLbs ? value : value / 16)} />
       </FormControl>
 
       <FormControl display='flex' mt='3'>
         <FormLabel flex='1'>Water</FormLabel>
-        <NumberInputMobile value={donutStyle.water} onChange={setWater} />
+        <NumberInputMobile
+          value={isLbs ? water : waterInOz}
+          onChange={value => setWater(isLbs ? value : value / 16)} />
       </FormControl>
 
       <ButtonGroup mt='6' w='full'>

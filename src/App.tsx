@@ -1,38 +1,10 @@
 import { Container } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 
-import SelectDonutStyles from './components/SelectDonutStyles'
+import CalculateIngredients from './components/CalculateIngredients'
 
 const App = () => {
-  const [donutStyles, setDonutStyles] = useState(JSON.parse(localStorage.getItem('donutStyles') || '') || [
-    {
-      id: 1,
-      name: 'Old Fashioned',
-      flour: 20,
-      yeast: 50,
-      water: 5,
-      selected: false,
-      quantity: 0
-    },
-    {
-      id: 2,
-      name: 'Cake',
-      flour: 40,
-      yeast: 0,
-      water: 15,
-      selected: false,
-      quantity: 0
-    },
-    {
-      id: 3,
-      name: 'Cream Filled',
-      flour: 30,
-      yeast: 20,
-      water: 5,
-      selected: false,
-      quantity: 0
-    },
-  ])
+  const [donutStyles, setDonutStyles] = useState(JSON.parse(localStorage.getItem('donutStyles') || ''))
 
   useEffect(() => {
     localStorage.setItem('donutStyles', JSON.stringify(donutStyles))
@@ -40,7 +12,7 @@ const App = () => {
 
   const addNewDonutStyle = newStyle => {
     setDonutStyles(donutStyles.concat({
-      ...newStyle, selected: false, quantity: 0 
+      ...newStyle, id: donutStyles.length + 1, selected: false, quantity: 0 
     }))
   }
 
@@ -54,15 +26,13 @@ const App = () => {
     setDonutStyles(donutStyles.filter(donutStyle => donutStyle.id !== id))
   }
 
-  console.log(donutStyles)
-
   return (
-    <Container>
-      <SelectDonutStyles
-        isOpen={true}
+    <Container py='6'>
+      <CalculateIngredients
         donutStyles={donutStyles}
-        onChange={updateDonutStyle}
-        onDelete={deleteDonutStyle} />
+        addNewDonutStyle={addNewDonutStyle}
+        deleteDonutStyle={deleteDonutStyle}
+        updateDonutStyle={updateDonutStyle} />
     </Container>
   )
 }
