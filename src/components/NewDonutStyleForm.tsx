@@ -1,4 +1,4 @@
-import { Button, FormControl, FormErrorMessage, FormLabel, HStack, Heading, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Switch, Text, VStack } from '@chakra-ui/react'
+import { Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Switch, Text, VStack } from '@chakra-ui/react'
 import NumberInputMobile from './NumberInputMobile'
 import { useState } from 'react'
 
@@ -11,6 +11,7 @@ const NewDonutStyleForm = ({ isOpen, onClose, onSubmit }) => {
 
   const handleClick = () => {
     onSubmit({ name, flour, yeast, water })
+    onClose()
   }
 
   return (
@@ -44,19 +45,19 @@ const NewDonutStyleForm = ({ isOpen, onClose, onSubmit }) => {
               </FormControl>
             </HStack>
 
-            <FormControl mt='3' display='flex'>
+            <FormControl display='flex'  mt='3'>
               <FormLabel flex='1'>Flour</FormLabel>
-              <NumberInputMobile onChange={setFlour} />
+              <NumberInputMobile value={flour} onChange={setFlour} />
             </FormControl>
 
-            <FormControl display='flex'>
+            <FormControl display='flex' mt='3'>
               <FormLabel flex='1'>Yeast</FormLabel>
-              <NumberInputMobile onChange={setYeast} />
+              <NumberInputMobile value={yeast} onChange={setYeast} />
             </FormControl>
 
-            <FormControl display='flex'>
+            <FormControl display='flex' mt='3'>
               <FormLabel flex='1'>Water</FormLabel>
-              <NumberInputMobile onChange={setWater} />
+              <NumberInputMobile value={water} onChange={setWater} />
             </FormControl>
           </VStack>
         </ModalBody>
