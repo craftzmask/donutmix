@@ -1,10 +1,9 @@
-import { Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Switch, Text, VStack } from '@chakra-ui/react'
+import { Button, FormControl, FormErrorMessage, FormLabel, HStack, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, VStack } from '@chakra-ui/react'
 import NumberInputMobile from './NumberInputMobile'
 import { useState } from 'react'
 
 const NewDonutStyleModal = ({ isOpen, onClose, onSubmit }) => {
   const [name, setName] = useState('')
-  const [isLbs, setIsLbs] = useState(true)
   const [flour, setFlour] = useState(0)
   const [yeast, setYeast] = useState(0)
   const [water, setWater] = useState(0)
@@ -14,12 +13,7 @@ const NewDonutStyleModal = ({ isOpen, onClose, onSubmit }) => {
     if (name.trim() === '') {
       setIsTouched(true)
     } else {
-      onSubmit({
-        name,
-        flour: isLbs ? flour : flour / 16,
-        yeast: isLbs ? yeast : yeast / 16,
-        water: isLbs ? water : water / 16
-      })
+      onSubmit({ name, flour, yeast, water })
       setName('')
       setIsTouched(false)
       onClose()
@@ -46,19 +40,6 @@ const NewDonutStyleModal = ({ isOpen, onClose, onSubmit }) => {
                 <FormErrorMessage>Name is required</FormErrorMessage>
               }
             </FormControl>
-
-            <HStack mt='3' w='full' justifyContent='space-between'>
-              <Text flex='2' fontWeight='bold' fontSize='xl'>Ingredients</Text>
-              <FormControl flex='1' display='flex' justifyContent='space-between' alignItems='center' gap='5'>
-                <FormLabel mb='0' mr='0' fontSize='xl'>oz</FormLabel>
-                <Switch
-                  size='lg'
-                  defaultChecked
-                  isChecked={isLbs}
-                  onChange={() => setIsLbs(!isLbs)} />
-                <FormLabel mb='0' fontSize='xl'>lbs</FormLabel>
-              </FormControl>
-            </HStack>
 
             <FormControl display='flex' alignItems='center' mt='3'>
               <FormLabel flex='1' mb='0'>Flour</FormLabel>
